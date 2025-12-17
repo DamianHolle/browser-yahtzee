@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<title>Javascript Yahtzee</title>
+<link rel="icon" type="image/x-icon" href="/images/yahtzee - logo.png">
+</head>
+<body>
+    <button id="gooiknop">Gooien!</button>
+    <button id="resetknop">Reset</button>
+    <br>
+    <br>
+    <table id="worp-score">
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+    </table>
+    <!--
+    Create 5 dice icons
+    -->
+    <span style="font-size:75px;">&#9856</span>
+    <span style="font-size:75px;">&#9856</span>
+    <span style="font-size:75px;">&#9856</span>
+    <span style="font-size:75px;">&#9856</span>
+    <span style="font-size:75px;">&#9856</span>
+    <p id="score-detector">Score:</p>
+    
+    <table id="score-tabel-deel1">
+        <tr>
+            <th>Deel 1</th>
+            <th>Punten Telling</th>
+            <th>1e spel</th>
+        </tr>
+        <tr>
+            <th>Enen &#9856;</th>
+            <th>Tel alle enen</th>
+            <td class="losse-score"></td>
+        </tr>
+        <tr>
+            <th>Tweeën &#9857;</th>
+            <th>Tel alle tweeën</th>
+            <td class="losse-score"></td>
+        </tr>
+        <tr>
+            <th>Drieën &#9858;</th>
+            <th>Tel alle drieën</th>
+            <td class="losse-score"></td>
+        </tr>
+        <tr>
+            <th>Vieren &#9859;</th>
+            <th>Tel alle vieren</th>
+            <td class="losse-score"></td>
+        </tr>
+        <tr>
+            <th>Vijfen &#9860;</th>
+            <th>Tel alle vijfen</th>
+            <td class="losse-score"></td>
+        </tr>
+        <tr>
+            <th>Zessen &#9861;</th>
+            <th>Tel alle zessen</th>
+            <td class="losse-score"></td>
+        </tr>
+        <tr>
+            <th>Bonus als puntentotaal 63 of meer is van bovenste helft</th>
+            <th>35 punten</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Totaal aantal punten</th>
+            <th>&#8594;</th>
+            <td id="totaalscore-losse"></td>
+        </tr>
+    </table>
+       <table id="score-tabel-deel2">
+        <tr>
+            <th>Deel 2</th>
+            <th>Uitleg</th>
+            <th>Punten telling</th>
+            <th>1e spel</th>
+        </tr>
+        <tr>
+            <th>Three of a kind</th>
+            <th>3 dezelfde</th>
+            <th>Totaal v.d 5 stenen</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Carré</th>
+            <th>4 dezelfde</th>
+            <th>Totaal v.d 5 stenen</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Full House</th>
+            <th>2 + 3 dezelfde</th>
+            <th>25 punten</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Kleine straat</th>
+            <th>4 opeenvolgende nummers</th>
+            <th>30 punten</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Grote straat</th>
+            <th>Vijf opeenvolgende nummers</th>
+            <th>40 punten</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Topscore - Yahtzee</th>
+            <th>5 dezelfde</th>
+            <th>50 punten</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Change</th>
+            <th>Vrije keus</th>
+            <th>Totaal v.d 5 stenen</th>
+            <td class="speciale-score"></td>
+        </tr>
+        <tr>
+            <th>Totaal aantal punten</th>
+            <th>van de onderste helft</th>
+            <th>&#8594;</th>
+            <td id="totaalscore-speciale"></td>
+        </tr>
+        <tr>
+            <th>Totaal</th>
+            <th>van beide tabellen</th>
+            <th>&#8594;</th>
+            <td id="totaalscore-beide"></td>
+        </tr>
+    </table>
+<script src="script.js"></script>
+</body>
+</html>

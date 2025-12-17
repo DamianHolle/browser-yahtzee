@@ -1,0 +1,22 @@
+table, th, td {
+    border-width: 1px;
+    border-style:groove;
+    padding: 3px;
+    font-size: large;
+    font-style: normal;
+    size: 125;
+}
+
+span {
+    padding: 2px;
+    border-width: 1px;
+    font-size: 3px;
+}
+
+button {
+    padding: 5px;
+}
+
+p {
+    padding: 5px;
+}
