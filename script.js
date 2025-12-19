@@ -10,13 +10,17 @@ const totaalScoreLos = document.getElementById('totaalscore-losse');
 const totaalScoreSpeciaal = document.getElementById('totaalscore-speciale');
 const totaalScoreBeide = document.getElementById('totaalscore-beide');
 const specialScores = document.getElementsByClassName('speciale-score');
-var waardes = {1: 0, 2: 0, 3: 0, 4:0, 5: 0, 6: 0};
+const waardes = {1: 0, 2: 0, 3: 0, 4:0, 5: 0, 6: 0};
 let rolls = 0;
 
+//possible special scores
+const fullHouseScore = 25;
+const kleineStraatScore = 30;
+const groteStraatScore = 40;
+const topScore = 50;
 
 knop.addEventListener('click', worp);
 resetKnop.addEventListener('click', reset);
-
 
 function reset () {
     location.reload();
@@ -38,6 +42,7 @@ function worp() {
     }
     sumDices(gegooideWaardes);
     checkSameRolls();
+    checkConsecutiveRolls();
 }
 
 function sumDices (diceRolls) {
@@ -45,52 +50,53 @@ function sumDices (diceRolls) {
     return diceSum;
 }
 
+
+//function checks for: Three of a kind, Full House, Carré, Yahtzee
 function checkSameRolls() {
-    console.log(waardes);
     for (let i = 0; i < 7; i++) {
-        if (waardes[i] == 5) {
-            console.log('Yahtzee!')
-            scoreDetector.innerText += "Yahtzee!";
-            specialScores[5].innerText = 50
-            totaalScoreSpeciaal.innerText += 50
-        }
-        if (waardes[i] == 4) {
-            console.log('Carré');
-            scoreDetector.innerText += "Carré";
-            specialScores[1].innerText = countUpperTable();
-            totaalScoreSpeciaal.innerText += countUpperTable();
-        }
+        //check for three of a kind // Full House
         if (waardes[i] == 3) {
+            //check for full house using another loop
             for (let j = 0; j < 7; j++) {
-                if(waardes[j] == 2) {
-                    console.log("Full House!");
-                    scoreDetector.innerText += "Full House";
-                    specialScores[2].innerText = 25
-                    totaalScoreSpeciaal.innerText += 25
-                    break;
-                }
-                if (j >= 6) {
-                    console.log("Three of a kind");
-                    scoreDetector.innerText +="Three of a kind";
-                    specialScores[0].innerText = countUpperTable();
-                    totaalScoreSpeciaal.innerText += countUpperTable();
+                //if a pair is found, full house score is given
+                if (waardes[j] == 2) {
+                    specialScores[2].innerText = fullHouseScore;
+                    totaalScoreSpeciaal.innerText += fullHouseScore;
+                    return;
                 }
             }
+            specialScores[0].innerText = countUpperTable();
+            totaalScoreSpeciaal.innerText += countUpperTable();
+            break;
         }
-        if (waardes[1] == 1 && waardes[2] == 1 && waardes[3] == 1 && waardes[4] == 1) {
-            if (waardes[5] == 1) {
-                console.log("Grote straat, vijf opeenvolgende nummers!");
-                scoreDetector.innerText += "Grote straat!";
-                specialScores[4].innerText = 40
-                totaalScoreSpeciaal.innerText += 40
+        //check for Carré // Yahtzee
+        else if (waardes[i] >= 4) {
+            if (waardes[i] == 5) {
+                specialScores[5].innerText = topScore
+                totaalScoreSpeciaal.innerText += topScore
                 break;
             }
-            else {
-                console.log("Kleine straat, vier opeenvolgende nummers")
-                scoreDetector.innerText += "Kleine straat!";
-                specialScores[3].innerText = 30
-                totaalScoreSpeciaal.innerText += 30
+            specialScores[1].innerText = countUpperTable();
+            totaalScoreSpeciaal.innerText += countUpperTable();
+            break;
             }
+    }
+}
+
+
+//function checks for: Kleine straat, Grote straat
+function checkConsecutiveRolls () {
+    //check for 4 or 5 consecutive numbers
+    for (let i = 0; i < 7; i++) {
+        if (waardes[1] == 1 && waardes[2] == 1 && waardes[3] == 1 && waardes[4] == 1) {
+            if (waardes[5] == 1) {
+                specialScores[4].innerText = groteStraatScore;
+                totaalScoreSpeciaal.innerText += groteStraatScore;
+                break;
+            }
+            specialScores[3].innerText = kleineStraatScore;
+            totaalScoreSpeciaal.innerText += kleineStraatScore;
+            break;
         }
     }
     countUpperTable();
@@ -99,8 +105,6 @@ function checkSameRolls() {
 
 function countUpperTable () {
     let total = Object.entries(waardes).map(([key, value]) => key * value);
-    console.log(total);
-
     for (let i = 0; i < total.length; i++) {
         scoreCells[i].innerText = total[i];
     }
